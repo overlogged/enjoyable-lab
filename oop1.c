@@ -8,6 +8,7 @@ struct animal
 	void (*Speak)();
 };
 
+
 // Animal::Animal(const char*name,void(*fun)())
 void Animal(struct animal*this,const char*name,void(*fun)())
 {

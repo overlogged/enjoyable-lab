@@ -6,6 +6,7 @@
 #define Car2FordCar(a) ((FordCar*)a)
 #define ForSale2FordCar(a) ( (FordCar*) ( ((char*)a) - offsetof(FordCar,sale) ) )
 
+
 typedef struct car
 {
     int max_speed;
