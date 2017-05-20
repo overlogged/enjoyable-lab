@@ -25,13 +25,19 @@ private:
 public:
 	typedef T type;
 	RecursiveCon(){}
-	RecursiveCon(T* p):data(p){}
+	RecursiveCon(T* p)
+	{
+		data=p;
+	}
 	RecursiveCon(const T& v)
 	{
 		data = std::shared_ptr<T>(new T);
 		*data=v;
 	}
-	RecursiveCon(const RecursiveCon<T>& a):data(a.data){}
+	RecursiveCon(const RecursiveCon<T>& a)
+	{
+		data=a.data;
+	}
 
 	T Value(){return *data;}
 };
@@ -43,7 +49,10 @@ class GeneralCon
 	T data;
 public:
 	GeneralCon(){}
-	GeneralCon(T v):data(v){}
+	GeneralCon(T v)
+	{
+		data=v;
+	}
 	T Value(){return data;}
 };
 
@@ -75,7 +84,8 @@ public:
 	bool Match(MT1& v,MT2 && t,MT... args)
 	{
 		if(Match<MT2,MT...>(std::forward<MT2>(t),args...)==false) return false;
-		return v=Get<count-sizeof...(args)-2>().Value(),true;
+		v=Get<count-sizeof...(args)-2>().Value();
+		return true;
 	}
 
 	template<typename MT2,typename...MT>
@@ -94,7 +104,8 @@ public:
 	template<typename MT1>
 	bool Match(MT1 & v)
 	{
-		return v=Get<count-1>().Value(),true;
+		v=Get<count-1>().Value();
+		return true;
 	}
 
 	bool Match(place_holder & v)
@@ -137,23 +148,24 @@ public:
 #define Enum(Name) 														\
 	const char* F##Name(){return #Name;}    							\
 	typedef Arg<F##Name> Name;
-#define Mul(Name,arg...) typedef TypeMul<arg> Name;
-#define EndData(Name,arg...)               								\
-	class Name:public TypeAdd<arg>										\
+#define Mul(Name,...) typedef TypeMul<__VA_ARGS__> Name;
+#define EndData(Name,...)               								\
+	class Name:public TypeAdd<__VA_ARGS__>								\
 	{																	\
 	public:																\
 		Name(){}														\
-		Name(auto v):TypeAdd<arg>(v){}									\
+		Name(auto v):TypeAdd<__VA_ARGS__>(v){}							\
 	};																	\
 }																		\
 typedef ADT_##Name::Name Name;
 
 #define With(x) {auto& match_var=x;if(0){if(0){;
-#define Case(Name,Type,arg...) }}else if(match_var.type()==typeid(ADT_##Name::Type)){	\
-		auto data##Type=boost::get<ADT_List::Type>(match_var);							\
-		if(data##Type.Match(arg)){;
+#define Case(Name,Type,...) }}else if(match_var.type()==typeid(ADT_##Name::Type)){	\
+		auto data##Type=boost::get<ADT_List::Type>(match_var);						\
+		if(data##Type.Match(__VA_ARGS__)){;
 
 #define Default() }}else{if(1){;
 #define EndWith() }}}
+
 
 #endif

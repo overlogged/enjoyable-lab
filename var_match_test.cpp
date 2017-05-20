@@ -26,5 +26,9 @@ int main()
     if(var_match(4,move(x))) cout<<"4==2\n";
     else cout<<"4!=2\n";
 
+    // match with diffrent types
+    // false
+    if(var_match(2.33,x)) cout<<"x can be 2.33\n";
+    else cout<<"x can't be 2.33\n";
     return 0;
 }
