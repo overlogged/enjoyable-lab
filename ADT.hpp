@@ -64,6 +64,7 @@ private:
 	typedef typename std::tuple<T1,T...> BaseType;
 	const static int count=sizeof...(T)+1;
 public:
+	TypeMul(){}
 	TypeMul(BaseType v):BaseType(v){}
 	TypeMul(T1 v,T...args):std::tuple<T1,T...>(v,args...){}
 
@@ -161,7 +162,7 @@ typedef ADT_##Name::Name Name;
 
 #define With(x) {auto& match_var=x;if(0){if(0){;
 #define Case(Name,Type,...) }}else if(match_var.type()==typeid(ADT_##Name::Type)){	\
-		auto data##Type=boost::get<ADT_List::Type>(match_var);						\
+		auto data##Type=boost::get<ADT_##Name::Type>(match_var);					\
 		if(data##Type.Match(__VA_ARGS__)){;
 
 #define Default() }}else{if(1){;
