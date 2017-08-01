@@ -4,6 +4,7 @@ import os
 
 def onQQMessage(bot, contact, member, content):
     time.sleep(2)
+    def admin(contact):
         return (contact.qq=="1761440454" or contact.mark=="admin")
     m = re.match(r"\/log (\d+)",content)
     if m and ((contact.qq=="659529585") or admin(contact)):

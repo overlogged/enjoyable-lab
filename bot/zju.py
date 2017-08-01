@@ -8,8 +8,8 @@ for line in fin:
     zjudict[m.groups()[1]] = m.groups()[0]
 
 def onQQMessage(bot, contact, member, content):
-    time.sleep(3)
-    if content[:3]=="/w ":
+    time.sleep(2)
+    if 1 or content[:3]=="/w ":
         words = content[3:]
         bot.SendTo(contact,zjudict.get("".join(words.split(' ')),d="つ﹏⊂抱歉我没找到")+" "+words)
     """
