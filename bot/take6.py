@@ -24,4 +24,4 @@ def onQQMessage(bot, contact, member, content):
         except:
             pass
     elif content=="reset" and (admin(member) or admin(contact)):
-        os.system("pkill java & cd /home/ubuntu/take6/server & sbt run &")
+        os.system("sh /home/ubuntu/reset.sh")
