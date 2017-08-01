@@ -1,14 +1,12 @@
 import re
 import time
 
-fin= open("zju.list","rt",encoding='utf-8')
-zjudict = {}
-for line in fin:
-    m = re.match(r'"(http.*)" "(.*)"',line)
-    zjudict[m.groups()[1]] = m.groups()[0]
-
 def onQQMessage(bot, contact, member, content):
-    time.sleep(2)
+    fin= open("zju.list","rt",encoding='utf-8')
+    zjudict = {}
+    for line in fin:
+        m = re.match(r'"(http.*)" "(.*)"',line)
+        zjudict[m.groups()[1]] = m.groups()[0]
     if content[:3]=="/w ":
         words = content[3:]
         out = "可能出错了/(ㄒoㄒ)/~~"
@@ -17,6 +15,7 @@ def onQQMessage(bot, contact, member, content):
         except:
             out = "つ﹏⊂抱歉我没找到"
         bot.SendTo(contact,out)
+    fin.close()
     """
 def init():
     from bs4 import BeautifulSoup

@@ -10,7 +10,7 @@ def onQQMessage(bot, contact, member, content):
     if m and ((contact.qq=="659529585") or admin(contact)):
         try:
             n = int(m.groups()[0])
-            fin = open("~/take6/log.txt","rt")
+            fin = open("/home/ubuntu/take6/server/log.txt","rt")
             lines = fin.readlines()
             skip=len(lines)-n
             out=""
@@ -24,4 +24,4 @@ def onQQMessage(bot, contact, member, content):
         except:
             pass
     elif content=="reset" and (admin(member) or admin(contact)):
-        os.system("pkill java & cd ~/take6/server & sbt run &")
+        os.system("pkill java & cd /home/ubuntu/take6/server & sbt run &")
