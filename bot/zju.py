@@ -9,9 +9,14 @@ for line in fin:
 
 def onQQMessage(bot, contact, member, content):
     time.sleep(2)
-    if 1 or content[:3]=="/w ":
+    if content[:3]=="/w ":
         words = content[3:]
-        bot.SendTo(contact,zjudict.get("".join(words.split(' ')),d="つ﹏⊂抱歉我没找到")+" "+words)
+        out = "可能出错了/(ㄒoㄒ)/~~"
+        try:
+            out=zjudict.get(words,d="つ﹏⊂抱歉我没找到")+" "+words
+        except:
+            out = "つ﹏⊂抱歉我没找到"
+        bot.SendTo(contact,out)
     """
 def init():
     from bs4 import BeautifulSoup
