@@ -2,3 +2,5 @@
 test*
 *.glob
 *.ibc
+.vscode/
+bot/.vscode
