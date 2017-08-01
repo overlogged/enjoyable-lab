@@ -5,7 +5,13 @@ import os
 def onQQMessage(bot, contact, member, content):
     time.sleep(2)
     def admin(contact):
-        return (contact.qq=="1761440454" or contact.mark=="admin")
+        ret = False
+        try:
+            ret = contact.qq=="1761440454"
+        except:
+            ret = False
+        return ret
+    
     m = re.match(r"\/log (\d+)",content)
     if m and ((contact.qq=="659529585") or admin(contact)):
         try:
@@ -23,5 +29,6 @@ def onQQMessage(bot, contact, member, content):
             fin.close()
         except:
             pass
-    elif content=="reset" and (admin(member) or admin(contact)):
+    elif content=="/reset" and (admin(member) or admin(contact)):
         os.system("sh /home/ubuntu/reset.sh")
+        bot.SendTo(contact,"reset successfully.")
