@@ -9,17 +9,12 @@ def onQQMessage(bot, contact, member, content):
         zjudict[m.groups()[1]] = m.groups()[0]
     if content[:3]=="/w ":
         words = content[3:]
+        bot.SendTo(contact,"words:"+words)
         out = "可能出错了/(ㄒoㄒ)/~~"
         try:
-            out=zjudict.get(words,d="つ﹏⊂抱歉我没找到")+" "+words
+            out=zjudict.get(words,"つ﹏⊂抱歉我没找到")+" "+words
         except:
-            out = ""
-            j=0
-            for i in zjudict:
-                out += i + '\n'
-                j+=1
-                if j==5: break
-            out = "つ﹏⊂抱歉我没找到"
+            out = "可能出错了/(ㄒoㄒ)/~~"
         bot.SendTo(contact,out)
     fin.close()
     """
