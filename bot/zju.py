@@ -6,7 +6,9 @@ from urllib.parse import quote
 
 def onQQMessage(bot, contact, member, content):
     words = content[3:]
-    if content[:3]=="/w ":
+    if content[:2]=="/h":
+        bot.SendTo(contact,"/h => 帮助\n/w 网站名称 => 查询校内常用网站\n/m 数学式子 => 调用wolframalpha(显示友好但回复慢)\n/a 数学式子 => 快速回复")
+    elif content[:3]=="/w ":
         out = "可能出错了/(ㄒoㄒ)/~~"
         fin= open("zju.list","rt",encoding='utf-8')
         rmax = 0
@@ -21,20 +23,34 @@ def onQQMessage(bot, contact, member, content):
             res = "つ﹏⊂抱歉我没找到" + words
         bot.SendTo(contact,res)
         fin.close()
-    if content[:3]=='/m ':
+    elif content[:3]=='/m ':
         url="可能出错了QAQ"
         try:
             d = webdriver.PhantomJS(executable_path=r"/home/ubuntu/node_modules/phantomjs/bin/phantomjs")
-            url = 'http://m.wolframalpha.com/input/?i=%s'%quote(words)
+            code = quote(words)
+            url = 'http://www.wolframalpha.com/input/?i=%s'%code
             d.get(url)
-            time.sleep(4)
-            d.execute_script("document.querySelector('#Input > section > footer > div > button.plaintext.ng-isolate-scope').click()")
+            
+            time.sleep(1)
+            fail=10
+            while(fail>0):
+                try:
+                    d.execute_script("document.querySelector('#Input > section > footer > div > button.plaintext.ng-isolate-scope').click()")
+                    fail = -1
+                except:
+                    time.sleep(1)
+                    fail -= 1
+            
             ans = d.find_element_by_xpath('//*[@id="plaintext"]').text
             out = "^_^答案是：%s\n详细解答见：%s" % (ans,url)
             bot.SendTo(contact,out)
             d.close()
         except:
             bot.SendTo(contact,url)
+    elif content[:3]=='/a ':
+        time.sleep(0.5)
+        code = quote(words)
+        out = 'PC端：http://www.wolframalpha.com/input/?i=%s \n 移动端：http://m.wolframalpha.com/input/?i=%s '%(code,code)
     """
 def init():
     from bs4 import BeautifulSoup
