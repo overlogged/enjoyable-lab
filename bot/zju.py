@@ -18,7 +18,7 @@ def onQQMessage(bot, contact, member, content):
         if rmax<0.4:
             res = "つ﹏⊂抱歉我没找到" + words
         bot.SendTo(contact,res)
-    fin.close()
+        fin.close()
     """
 def init():
     from bs4 import BeautifulSoup
