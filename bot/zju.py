@@ -7,7 +7,7 @@ from urllib.parse import quote
 def onQQMessage(bot, contact, member, content):
     words = content[3:]
     if content[:2]=="/h":
-        bot.SendTo(contact,"/h => 帮助\n/w 网站名称 => 查询校内常用网站\n/m 数学式子 => 调用wolframalpha(显示友好但回复慢)\n/a 数学式子 => 快速回复")
+        bot.SendTo(contact,"/h:帮助\n/w 网站名称:查询校内常用网站\n/m 数学式子:调用wolframalpha(显示友好但回复慢)\n/a 数学式子:快速回复")
     elif content[:3]=="/w ":
         out = "可能出错了/(ㄒoㄒ)/~~"
         fin= open("zju.list","rt",encoding='utf-8')
@@ -48,9 +48,9 @@ def onQQMessage(bot, contact, member, content):
         except:
             bot.SendTo(contact,url)
     elif content[:3]=='/a ':
-        time.sleep(0.5)
+        time.sleep(0.2)
         code = quote(words)
-        out = 'PC端：http://www.wolframalpha.com/input/?i=%s \n 移动端：http://m.wolframalpha.com/input/?i=%s '%(code,code)
+        out = 'PC端：http://www.wolframalpha.com/input/?i=%s \n移动端：http://m.wolframalpha.com/input/?i=%s '%(code,code)
         bot.SendTo(contact,out)
     """
 def init():
