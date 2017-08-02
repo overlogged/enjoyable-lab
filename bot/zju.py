@@ -29,7 +29,7 @@ def onQQMessage(bot, contact, member, content):
             d.find_element_by_id('query').send_keys(words)
             d.find_element_by_name('equal').click()
             url = d.current_url
-            time.sleep(10)
+            time.sleep(4)
             d.execute_script("document.querySelector('#Input > section > footer > div > button.plaintext.ng-isolate-scope').click()")
             ans = d.find_element_by_xpath('//*[@id="plaintext"]').text
             out = "^o^答案是：%s\n详细解答见：%s" % (ans,url)
