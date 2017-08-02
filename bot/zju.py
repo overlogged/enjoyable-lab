@@ -1,20 +1,23 @@
 import re
 import time
+import difflib
 
 def onQQMessage(bot, contact, member, content):
-    fin= open("zju.list","rt",encoding='utf-8')
-    zjudict = {}
-    for line in fin:
-        m = re.match(r'"(http.*)" "(.*)"',line)
-        zjudict[m.groups()[1]] = m.groups()[0]
     if content[:3]=="/w ":
         words = content[3:]
         out = "可能出错了/(ㄒoㄒ)/~~"
-        try:
-            out=zjudict.get(words,"つ﹏⊂抱歉我没找到")+" "+words
-        except:
-            out = "可能出错了/(ㄒoㄒ)/~~"
-        bot.SendTo(contact,out)
+        fin= open("zju.list","rt",encoding='utf-8')
+        rmax = 0
+        res = ""
+        for line in fin:
+            m = re.match(r'"(http.*)" "(.*)"',line)
+            r = difflib.SequenceMatcher(None,m.groups()[1],words)
+            if r>rmax:
+                rmax=r
+                res=m.groups()[1] + " " + words
+        if rmax<0.4:
+            res = "つ﹏⊂抱歉我没找到" + words
+        bot.SendTo(contact,res)
     fin.close()
     """
 def init():
