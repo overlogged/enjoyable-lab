@@ -4,3 +4,4 @@ test*
 *.ibc
 .vscode/
 bot/.vscode
+*.log
