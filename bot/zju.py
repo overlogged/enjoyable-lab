@@ -22,7 +22,7 @@ def onQQMessage(bot, contact, member, content):
         fin.close()
     if content[:3]=='/m ':
         try:
-            d = webdriver.PhantomJS()
+            d = webdriver.PhantomJS(executable_path=r"/home/ubuntu/node_modules/phantomjs/bin/phantomjs")
             d.get('http://www.wolframalpha.com/')
             d.find_element_by_id('query').send_keys(words)
             d.find_element_by_name('equal').click()
