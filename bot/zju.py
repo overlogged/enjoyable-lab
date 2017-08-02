@@ -8,7 +8,7 @@ def onQQMessage(bot, contact, member, content):
         m = re.match(r'"(http.*)" "(.*)"',line)
         zjudict[m.groups()[1]] = m.groups()[0]
     if content[:3]=="/w ":
-        bot.SendTo(contact,"words:"+words)
+        words = content[3:]
         out = "可能出错了/(ㄒoㄒ)/~~"
         try:
             out=zjudict.get(words,"つ﹏⊂抱歉我没找到")+" "+words
