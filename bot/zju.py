@@ -51,6 +51,7 @@ def onQQMessage(bot, contact, member, content):
         time.sleep(0.5)
         code = quote(words)
         out = 'PC端：http://www.wolframalpha.com/input/?i=%s \n 移动端：http://m.wolframalpha.com/input/?i=%s '%(code,code)
+        bot.SendTo(contact,out)
     """
 def init():
     from bs4 import BeautifulSoup
