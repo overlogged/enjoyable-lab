@@ -21,8 +21,8 @@ def onQQMessage(bot, contact, member, content):
         bot.SendTo(contact,res)
         fin.close()
     if content[:3]=='/m ':
-        d = webdriver.PhantomJS()
         try:
+            d = webdriver.PhantomJS()
             d.get('http://www.wolframalpha.com/')
             d.find_element_by_id('query').send_keys(words)
             d.find_element_by_name('equal').click()
@@ -31,11 +31,9 @@ def onQQMessage(bot, contact, member, content):
             ans = d.find_element_by_xpath('//*[@id="plaintext"]').text
             out = "^o^答案是：%s\n详细解答见：%s" % (ans,d.current_url)
             bot.SendTo(contact,out)
+            d.close()
         except:
             bot.SendTo(contact,"可能出错了/(ㄒoㄒ)/~~")
-        finally:
-            d.close()
-
     """
 def init():
     from bs4 import BeautifulSoup
