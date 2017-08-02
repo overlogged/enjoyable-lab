@@ -21,8 +21,8 @@ def onQQMessage(bot, contact, member, content):
         bot.SendTo(contact,res)
         fin.close()
     if content[:3]=='/m ':
+        d = webdriver.PhantomJS()
         try:
-            d = webdriver.PhantomJS()
             d.get('http://www.wolframalpha.com/')
             d.find_element_by_id('query').send_keys(words)
             d.find_element_by_name('equal').click()
