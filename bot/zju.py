@@ -13,6 +13,12 @@ def onQQMessage(bot, contact, member, content):
         try:
             out=zjudict.get(words,d="つ﹏⊂抱歉我没找到")+" "+words
         except:
+            out = ""
+            j=0
+            for i in zjudict:
+                out += i + '\n'
+                j+=1
+                if j==5: break
             out = "つ﹏⊂抱歉我没找到"
         bot.SendTo(contact,out)
     fin.close()
