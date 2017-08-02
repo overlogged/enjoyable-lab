@@ -2,6 +2,7 @@ import re
 import time
 import difflib
 from selenium import webdriver
+from urllib.parse import quote
 
 def onQQMessage(bot, contact, member, content):
     words = content[3:]
@@ -24,15 +25,12 @@ def onQQMessage(bot, contact, member, content):
         url="可能出错了QAQ"
         try:
             d = webdriver.PhantomJS(executable_path=r"/home/ubuntu/node_modules/phantomjs/bin/phantomjs")
-            d.get('http://www.wolframalpha.com/')
-            time.sleep(1)
-            d.find_element_by_id('query').send_keys(words)
-            d.find_element_by_name('equal').click()
-            url = d.current_url
+            url = 'http://m.wolframalpha.com/input/?i=%s'%quote(words)
+            d.get(url)
             time.sleep(4)
             d.execute_script("document.querySelector('#Input > section > footer > div > button.plaintext.ng-isolate-scope').click()")
             ans = d.find_element_by_xpath('//*[@id="plaintext"]').text
-            out = "^o^答案是：%s\n详细解答见：%s" % (ans,url)
+            out = "^_^答案是：%s\n详细解答见：%s" % (ans,url)
             bot.SendTo(contact,out)
             d.close()
         except:
