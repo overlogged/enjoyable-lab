@@ -58,9 +58,9 @@ def filter():
 
 filter()
 """
-"""
+
 words = "d(x+x^3)/dx"
-d = webdriver.PhantomJS()
+d = webdriver.PhantomJS(executable_path=r"/home/ubuntu/node_modules/phantomjs/bin/phantomjs")
 d.get('http://www.wolframalpha.com/')
 time.sleep(1)
 d.find_element_by_id('query').send_keys(words)
@@ -69,4 +69,3 @@ time.sleep(5)
 print(d.current_url)
 d.execute_script("document.querySelector('#Input > section > footer > div > button.plaintext.ng-isolate-scope').click()")
 print(d.find_element_by_xpath('//*[@id="plaintext"]').text)
-"""
