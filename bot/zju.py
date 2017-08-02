@@ -11,7 +11,7 @@ def onQQMessage(bot, contact, member, content):
         res = ""
         for line in fin:
             m = re.match(r'"(http.*)" "(.*)"',line)
-            r = difflib.SequenceMatcher(None,m.groups()[1],words)
+            r = difflib.SequenceMatcher(None,m.groups()[1],words).ratio()
             if r>rmax:
                 rmax=r
                 res=m.groups()[1] + " " + words
