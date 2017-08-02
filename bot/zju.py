@@ -21,19 +21,19 @@ def onQQMessage(bot, contact, member, content):
         bot.SendTo(contact,res)
         fin.close()
     if content[:3]=='/m ':
-        try:
-            d = webdriver.PhantomJS(executable_path=r"/home/ubuntu/node_modules/phantomjs/bin/phantomjs")
-            d.get('http://www.wolframalpha.com/')
-            d.find_element_by_id('query').send_keys(words)
-            d.find_element_by_name('equal').click()
-            time.sleep(5)
-            d.execute_script("document.querySelector('#Input > section > footer > div > button.plaintext.ng-isolate-scope').click()")
-            ans = d.find_element_by_xpath('//*[@id="plaintext"]').text
-            out = "^o^答案是：%s\n详细解答见：%s" % (ans,d.current_url)
-            bot.SendTo(contact,out)
-            d.close()
-        except:
-            bot.SendTo(contact,"可能出错了/(ㄒoㄒ)/~~")
+        #try:
+        d = webdriver.PhantomJS(executable_path=r"/home/ubuntu/node_modules/phantomjs/bin/phantomjs")
+        d.get('http://www.wolframalpha.com/')
+        d.find_element_by_id('query').send_keys(words)
+        d.find_element_by_name('equal').click()
+        time.sleep(5)
+        d.execute_script("document.querySelector('#Input > section > footer > div > button.plaintext.ng-isolate-scope').click()")
+        ans = d.find_element_by_xpath('//*[@id="plaintext"]').text
+        out = "^o^答案是：%s\n详细解答见：%s" % (ans,d.current_url)
+        bot.SendTo(contact,out)
+        d.close()
+        #except:
+        #   bot.SendTo(contact,"可能出错了/(ㄒoㄒ)/~~")
     """
 def init():
     from bs4 import BeautifulSoup
@@ -58,7 +58,7 @@ def filter():
 
 filter()
 """
-
+"""
 words = "d(x+x^3)/dx"
 d = webdriver.PhantomJS(executable_path=r"/home/ubuntu/node_modules/phantomjs/bin/phantomjs")
 d.get('http://www.wolframalpha.com/')
@@ -69,3 +69,4 @@ time.sleep(5)
 print(d.current_url)
 d.execute_script("document.querySelector('#Input > section > footer > div > button.plaintext.ng-isolate-scope').click()")
 print(d.find_element_by_xpath('//*[@id="plaintext"]').text)
+"""
