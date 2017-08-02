@@ -25,7 +25,7 @@ def onQQMessage(bot, contact, member, content):
         try:
             d = webdriver.PhantomJS(executable_path=r"/home/ubuntu/node_modules/phantomjs/bin/phantomjs")
             d.get('http://www.wolframalpha.com/')
-            d.sleep(1)
+            time.sleep(1)
             d.find_element_by_id('query').send_keys(words)
             d.find_element_by_name('equal').click()
             url = d.current_url
@@ -36,7 +36,7 @@ def onQQMessage(bot, contact, member, content):
             bot.SendTo(contact,out)
             d.close()
         except:
-           bot.SendTo(contact,url)
+            bot.SendTo(contact,url)
     """
 def init():
     from bs4 import BeautifulSoup
