@@ -14,7 +14,7 @@ def onQQMessage(bot, contact, member, content):
             r = difflib.SequenceMatcher(None,m.groups()[1],words).ratio()
             if r>rmax:
                 rmax=r
-                res=m.groups()[1] + " " + words
+                res=m.groups()[1] + " " + m.groups()[0]
         if rmax<0.4:
             res = "つ﹏⊂抱歉我没找到" + words
         bot.SendTo(contact,res)
