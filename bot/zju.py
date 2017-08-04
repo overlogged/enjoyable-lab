@@ -20,7 +20,7 @@ def onQQMessage(bot, contact, member, content):
                 rmax=r
                 res=m.groups()[1] + " " + m.groups()[0]
         if rmax<0.4:
-            res = "つ﹏⊂抱歉我没找到" + words
+            res = "つ﹏⊂抱歉我没找到"
         bot.SendTo(contact,res)
         fin.close()
     elif content[:3]=='/m ':
